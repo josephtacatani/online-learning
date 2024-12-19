@@ -1,0 +1,23 @@
+    <nav>
+      <span class="logo">MyOLearning</span>
+      <ul>
+        <!-- Show Login/Register if not logged in -->
+        <li *ngIf="!(isLoggedIn$ | async)">
+          <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="!(isLoggedIn$ | async)">
+          <a routerLink="/register">Register</a>
+        </li>
+    
+        <!-- Show other options if logged in -->
+        <li *ngIf="isLoggedIn$ | async">
+          <a routerLink="/courses">My Courses</a>
+        </li>
+        <li *ngIf="isLoggedIn$ | async">
+          <a routerLink="/settings">Settings</a>
+        </li>
+        <li *ngIf="isLoggedIn$ | async">
+          <a (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+    </nav>

@@ -1,0 +1,55 @@
+.course-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Cards occupy 30% of the row */
+    gap: 20px; /* Space between the cards */
+    padding: 20px;
+  }
+  
+  .course-card {
+    background-color: #f9f9f9; /* Light background for the card */
+    border: 1px solid #ddd; /* Light border for separation */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Space inside the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-5px); /* Slight upward movement on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  .course-name {
+    font-size: 1.5em; /* Bigger font size for the course name */
+    font-weight: bold;
+    margin-bottom: 10px; /* Space below the course name */
+    color: #333;
+  }
+  
+  .course-description {
+    font-size: 0.95em;
+    color: #555; /* Slightly muted color for descriptions */
+    margin-bottom: 10px;
+  }
+  
+  .course-hours {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .no-courses {
+    text-align: center;
+    margin: 50px;
+    font-size: 1.2em;
+    color: gray;
+  }
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
