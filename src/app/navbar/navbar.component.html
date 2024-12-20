@@ -11,7 +11,7 @@
     
         <!-- Show other options if logged in -->
         <li *ngIf="isLoggedIn$ | async">
-          <a routerLink="/courses">My Courses</a>
+          <a [routerLink]="getCoursesLink().link">{{ getCoursesLink().text }}</a>
         </li>
         <li *ngIf="isLoggedIn$ | async">
           <a routerLink="/settings">Settings</a>
