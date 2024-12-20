@@ -14,6 +14,11 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { getCourseFeatureKey, getCourseReducer } from './app/homepage/ngrx/homepage.reducer';
 import { GetCourseEffects } from './app/homepage/ngrx/homepage.effects';
+import { enrollCourseFeatureKey, enrollCourseReducer } from './app/userpage/ngrx/userpage.reducer';
+import { enrollCourseEffects } from './app/userpage/ngrx/userpage.effects';
+import { myCourseFeatureKey, myCourseReducer } from './app/mycourses/ngrx/mycourses.reducer';
+import { myCourseEffects } from './app/mycourses/ngrx/mycourses.effects';
+import { deleteMyCourseFeatureKey, deleteMyCourseReducer } from './app/mycourses/ngrx/mycourses.enrollmentreducer copy';
 
 bootstrapApplication(AppComponent, {
   providers:[
@@ -21,9 +26,17 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideStore({
       [logregFeatureKey]: logregReducer,
-      [getCourseFeatureKey]: getCourseReducer
+      [getCourseFeatureKey]: getCourseReducer,
+      [enrollCourseFeatureKey]: enrollCourseReducer,
+      [myCourseFeatureKey]: myCourseReducer,
+      [deleteMyCourseFeatureKey]: deleteMyCourseReducer
     }),
-    provideEffects([LogRegEffects, GetCourseEffects]),
+    provideEffects([
+      LogRegEffects, 
+      GetCourseEffects,
+      enrollCourseEffects,
+      myCourseEffects
+    ]),
     importProvidersFrom(
       BrowserAnimationsModule,
       StoreDevtoolsModule.instrument({

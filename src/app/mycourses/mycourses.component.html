@@ -1,0 +1,33 @@
+<!-- Loading Spinner -->
+<div *ngIf="isLoading$ | async" class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  
+  <!-- Course List -->
+  <div *ngIf="(mycourses$ | async) as courses; else noCourses" class="course-container">
+    <div *ngIf="courses.length > 0; else noCoursesContent">
+      <div class="course-card" *ngFor="let course of courses" (click)="onCourseClick(course.courseId)">
+        <h3 class="course-name">{{ course.courseName }}</h3>
+        <p class="course-description">{{ course.courseDescription }}</p>
+        <p class="course-hours"><strong>Total Hours:</strong> {{ course.totalHours }}</p>
+
+        <button class="delete-button" (click)="onDeleteCourse(course.enrollmentId)">Delete</button>
+  
+      </div>
+    </div>
+  </div>
+  
+  <!-- No Courses Fallback -->
+  <ng-template #noCourses>
+    <div *ngIf="!(isLoading$ | async)" class="no-courses">
+      <p>No courses available.</p>
+    </div>
+  </ng-template>
+  
+  <!-- No Courses When Empty Array -->
+  <ng-template #noCoursesContent>
+    <div class="no-courses">
+      <p>No courses available.</p>
+    </div>
+  </ng-template>
+  

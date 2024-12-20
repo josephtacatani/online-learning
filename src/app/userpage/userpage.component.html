@@ -1,1 +1,19 @@
-<p>userpage works!</p>
+<div *ngIf="isLoading$ | async" class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  
+  <div *ngIf="(courses$ | async) as courses" class="course-container">
+    <div class="course-card" *ngFor="let course of courses" >
+      <h3 class="course-name">{{ course.courseName }}</h3>
+      <p class="course-description">{{ course.courseDescription }}</p>
+      <p class="course-hours"><strong>Total Hours:</strong> {{ course.totalHours }}</p>
+      <button mat-raised-button color="primary" (click)="onEnrollClick(course.courseId)">
+        Enroll
+      </button>
+    </div>
+  </div>
+  
+  <div *ngIf="!(courses$ | async) && !(isLoading$ | async)" class="no-courses">
+    <p>No courses available.</p>
+  </div>
+  
