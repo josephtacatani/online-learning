@@ -46,7 +46,7 @@ export class HomepageComponent {
   }
 
   ngOnInit(): void {
-    // Dispatch action to fetch courses
+    // Dispatch action to fetch courses new comment herre
     this.store.dispatch(GetCourseActions.getCourse());
   }
 
