@@ -1,8 +1,8 @@
 trigger:
-- main  # or your default branch
+- main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: my-pool
 
 steps:
 - task: NodeTool@0
