@@ -6,8 +6,14 @@
   <!-- Course List -->
   <div *ngIf="(mycourses$ | async) as courses; else noCourses" class="course-container">
     <div *ngIf="courses.length > 0; else noCoursesContent">
-      <div class="course-card" *ngFor="let course of courses" (click)="onCourseClick(course.courseId)">
-        <h3 class="course-name">{{ course.courseName }}</h3>
+      <div class="course-card" *ngFor="let course of courses" >
+        <h3 class="course-name">
+          <a
+            [routerLink]="['/videos', course.courseId]"
+            class="course-link">
+            {{ course.courseName }}
+          </a>
+        </h3>
         <p class="course-description">{{ course.courseDescription }}</p>
         <p class="course-hours"><strong>Total Hours:</strong> {{ course.totalHours }}</p>
 
