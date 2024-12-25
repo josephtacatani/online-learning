@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { DeleteMyCourseRequestInterface, MyCourseInterface } from './ngrx/mycourses.interface';
 import { Store } from '@ngrx/store';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { selectIsLoading, selectMyCoursebyIdData, selectMyCoursebyIdMessage } from './ngrx/mycourses.reducer';
 import { MyCoursesActions } from './ngrx/mycourses.actions';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { selectEnrollmentErrors, selectEnrollmentMessage } from './ngrx/mycourses.enrollmentreducer copy';
+import { VideosActions } from '../videos/ngrx/videos.actions';
 
 @Component({
   selector: 'app-mycourses',
@@ -16,7 +17,8 @@ import { selectEnrollmentErrors, selectEnrollmentMessage } from './ngrx/mycourse
   imports: [
     CommonModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterModule
   ],
   templateUrl: './mycourses.component.html',
   styleUrls: ['./mycourses.component.scss']
@@ -82,9 +84,6 @@ export class MycoursesComponent {
     });
   }
 
-  onCourseClick(courseId: number){
-
-  }
 
   onDeleteCourse(enrollmentId: number){
 
@@ -94,5 +93,7 @@ export class MycoursesComponent {
 
     this.store.dispatch(MyCoursesActions.deleteCourse({deletemyCoursePayload}));
   }
+
+  
 
 }

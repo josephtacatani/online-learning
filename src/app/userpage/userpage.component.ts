@@ -6,12 +6,13 @@ import { Store } from '@ngrx/store';
 import { CourseInterface } from '../homepage/ngrx/homepage.interface';
 import { selectCourses, selectError, selectIsLoading } from '../homepage/ngrx/homepage.reducer';
 import { GetCourseActions } from '../homepage/ngrx/homepage.actions';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EnrollCourseService } from './ngrx/userpage.service';
 import { EnrollCourseActions } from './ngrx/userpage.actions';
 import { EnrollCourseRequestInterface } from './ngrx/userpage.interface';
 import { selectEnrollMessage } from './ngrx/userpage.reducer';
+import { VideosActions } from '../videos/ngrx/videos.actions';
 
 
 @Component({
@@ -20,7 +21,8 @@ import { selectEnrollMessage } from './ngrx/userpage.reducer';
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RouterModule
 
   ],
   templateUrl: './userpage.component.html',
@@ -111,4 +113,7 @@ export class UserpageComponent {
   private getCurrentTime(): string {
     return new Date().toISOString(); // Get current time in ISO format
   }
+
+
+  
 }

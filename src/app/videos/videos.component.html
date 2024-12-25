@@ -1,0 +1,32 @@
+<div class="container" *ngIf="getVideosbyIdData$ | async as videos">
+  <!-- Sidebar with video list -->
+  <div class="sidebar">
+    <div class="course-item" *ngFor="let video of videos" (click)="selectVideo(video)">
+      <h3 class="clickable">{{ video.videoTitle }}</h3>
+      <span class="status">Not Completed</span>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div class="content" *ngIf="selectedVideo">
+    <!-- Video Player -->
+    <div class="video">
+      <iframe
+        [src]="selectedVideo.videoUrl | safeUrl"
+        title="{{ selectedVideo.videoTitle }}"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Video Details -->
+    <div class="course-details">
+      <h2>{{ selectedVideo.videoTitle }}</h2>
+      <p>{{ selectedVideo.videoDescription }}</p>
+      <div class="details-footer">
+        <span class="duration">{{ selectedVideo.totalDuration }}</span>
+        <button class="mark-complete">Mark as Complete</button>
+      </div>
+    </div>
+  </div>
+</div>

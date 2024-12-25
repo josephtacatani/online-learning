@@ -1,0 +1,11 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+  - job: TestJob
+    steps:
+      - script: echo "Hello from Microsoft-hosted agent!"
+        displayName: 'Test Step'
