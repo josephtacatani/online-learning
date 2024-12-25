@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { VideosErrorResponseInterface, VideosResponseInterface } from "./videos.interface";
+import { AddStartProgressErrorsInterface, AddStartProgressRequestInterface, AddStartProgressResponseInterface, VideosErrorResponseInterface, VideosResponseInterface } from "./videos.interface";
 
 export const VideosActions = createActionGroup({
     source: 'videos',
@@ -7,5 +7,9 @@ export const VideosActions = createActionGroup({
         'Get Videos': props<({courseId: number})>(),
         'Get Videos Success': props <{getVideosResponse: VideosResponseInterface}>(),
         'Get Videos Failure': props <{getVideosErrors: VideosErrorResponseInterface}>(),
+
+        'Add Start Progress': props<({addStartProgressPayload: AddStartProgressRequestInterface})>(),
+        'Add Start Progress Success': props<({addStartProgressResponse: AddStartProgressResponseInterface})>(),
+        'Add Start Progress Failure': props<({addStartProgressErrors: AddStartProgressErrorsInterface})>()
     }
 })

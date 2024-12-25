@@ -4,7 +4,7 @@ import { Route, Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { VideosActions } from "./videos.actions";
-import { VideosErrorResponseInterface, VideosResponseInterface } from "./videos.interface";
+import { AddStartProgressResponseInterface, VideosErrorResponseInterface, VideosResponseInterface } from "./videos.interface";
 
 
 @Injectable()
@@ -31,7 +31,24 @@ export class VideosEffects {
             )
           )
         )
-      );
+    );
+
+    addstartprogress$ = createEffect(()=>
+      this.actions$.pipe(
+        ofType(VideosActions.addStartProgress),
+          mergeMap(action =>
+          this.videosService.addStartProgress(action.addStartProgressPayload).pipe(
+            map((addStartProgressResponse) =>
+              VideosActions.addStartProgressSuccess({addStartProgressResponse})
+            ),
+            catchError((addStartProgressErrors)=>
+              of(VideosActions.addStartProgressFailure({addStartProgressErrors}))
+            )
+          )
+        )
+      )
+
+    );
       
 
 

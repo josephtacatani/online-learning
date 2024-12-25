@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectVideosData, selectVideosError, selectVideosMessage } from './ngrx/videos.reducer';
 import { Observable } from 'rxjs';
-import { VideosData } from './ngrx/videos.interface';
+import { AddStartProgressRequestInterface, VideosData } from './ngrx/videos.interface';
 import { MatSnackBar,MatSnackBarModule } from '@angular/material/snack-bar';
 import { VideosActions } from './ngrx/videos.actions';
+import { SafeUrlPipe } from './safeUrlPipe';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { VideosActions } from './ngrx/videos.actions';
   imports: [
     CommonModule,
     MatSnackBarModule,
+    SafeUrlPipe
   ],
   templateUrl: './videos.component.html',
   styleUrls: ['./videos.component.scss']
@@ -25,6 +27,9 @@ export class VideosComponent implements OnInit {
   getVideosbyIdData$: Observable<VideosData[] | null>;
   getVideosbyIdErrors$: Observable<string | null>;
   getVideosbyIdMessage$: Observable<string | null>;
+  selectedVideo: VideosData | null = null;
+  enrollmentId: number | null = null;
+
 
 
 
@@ -37,25 +42,16 @@ export class VideosComponent implements OnInit {
     this.getVideosbyIdMessage$ = this.store.select(selectVideosMessage);
     this.getVideosbyIdErrors$ = this.store.select(selectVideosError);
 
-    this.getVideosbyIdErrors$.subscribe((error) => {
-      if (error) {
-        this.showSnackbar(error);
-      }
-    });
-  
-    this.getVideosbyIdMessage$.subscribe((message) => {
-      if (message) {
-        this.showSnackbar(message);
-      }
-    });
 
   }
 
   ngOnInit(): void {
 
-        this.route.paramMap.subscribe((params) => {
+      this.route.paramMap.subscribe((params) => {
       const courseId = params.get('courseId'); // Get courseId from URL
-      if (courseId) {
+      const enrollmentId = params.get('enrollmentId'); // Get enrollment from URL
+      if (courseId && enrollmentId) {
+        this.enrollmentId = +enrollmentId
         this.store.dispatch(VideosActions.getVideos({ courseId: +courseId })); // Convert to number
       }
     });
@@ -69,6 +65,32 @@ export class VideosComponent implements OnInit {
     });
   }
 
+  selectVideo (video: VideosData): void {
+    this.selectedVideo = video;
+    const videoId = video.videoId;
+    if (this.enrollmentId){
+      this.addStartProgress(videoId, this.enrollmentId);
+    }
+    
+  }
+
+  addStartProgress(videoId: number, enrollmentId: number){
+    const dateNow = this.getCurrentTime();
+
+    const addStartProgressPayload: AddStartProgressRequestInterface = {
+      enrollmentId: enrollmentId,
+      videoId: videoId,
+      isStarted: true,
+      isCompleted: false,
+      startedDate: dateNow,
+      completedDate: dateNow
+    } 
+    this.store.dispatch(VideosActions.addStartProgress({addStartProgressPayload}));
+
+  }
+  private getCurrentTime(): string {
+    return new Date().toISOString(); // Get current time in ISO format
+  }
 
 
 }

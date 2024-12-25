@@ -21,6 +21,7 @@ import { myCourseEffects } from './app/mycourses/ngrx/mycourses.effects';
 import { deleteMyCourseFeatureKey, deleteMyCourseReducer } from './app/mycourses/ngrx/mycourses.enrollmentreducer copy';
 import { videosFeatureKey, videosReducer } from './app/videos/ngrx/videos.reducer';
 import { VideosEffects } from './app/videos/ngrx/videos.effects';
+import { addStartProgressFeatureKey, addStartProgressReducer } from './app/videos/ngrx/addtsartprogress.reducer';
 
 bootstrapApplication(AppComponent, {
   providers:[
@@ -32,7 +33,8 @@ bootstrapApplication(AppComponent, {
       [enrollCourseFeatureKey]: enrollCourseReducer,
       [myCourseFeatureKey]: myCourseReducer,
       [deleteMyCourseFeatureKey]: deleteMyCourseReducer,
-      [videosFeatureKey]: videosReducer
+      [videosFeatureKey]: videosReducer,
+      [addStartProgressFeatureKey]: addStartProgressReducer
     }),
     provideEffects([
       LogRegEffects, 

@@ -12,5 +12,5 @@ export const routes: Routes = [
     { path: 'userpage', component: UserpageComponent },
     { path: 'mycourses', component: MycoursesComponent },
     { path: 'videos', component: VideosComponent },
-    { path: 'videos/:courseId', component: VideosComponent },
+    { path: 'videos/:courseId/:enrollmentId', component: VideosComponent },
 ];

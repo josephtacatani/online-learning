@@ -9,7 +9,7 @@
       <div class="course-card" *ngFor="let course of courses" >
         <h3 class="course-name">
           <a
-            [routerLink]="['/videos', course.courseId]"
+            [routerLink]="['/videos', course.courseId, course.enrollmentId]"
             class="course-link">
             {{ course.courseName }}
           </a>
